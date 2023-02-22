@@ -93,7 +93,7 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-let managecontractAddr = CREATE_TOKEN_MANAGE_ADDRESS.bobaTestnet;
+let managecontractAddr = CREATE_TOKEN_MANAGE_ADDRESS.mantleTestnet;
 
 export default function CreateTokenMain() {
   const { account, library } = useWeb3React();
@@ -118,13 +118,13 @@ export default function CreateTokenMain() {
   const classes = useStyles();
 
   const [feeInfo, setFeeInfo] = useState({
-    normal: 'NAN',
-    mint: 'NAN',
-    burn: 'NAN',
-    pause: 'NAN',
-    blacklist: 'NAN',
-    deflation: 'NAN',
-    curfee: 'NAN',
+    normal: '000',
+    mint: '000',
+    burn: '000',
+    pause: '000',
+    blacklist: '000',
+    deflation: '000',
+    curfee: '000',
   });
 
   const ErrorDlgShow = (flag, alertstr) => {
@@ -160,14 +160,13 @@ export default function CreateTokenMain() {
     } else if (library._network.chainId === 97) {
       setCoin('BNB');
       managecontractAddr = CREATE_TOKEN_MANAGE_ADDRESS.bsc;
-    }  else if (library._network.chainId === 28) {
-      setCoin('BOBA');
-      managecontractAddr = CREATE_TOKEN_MANAGE_ADDRESS.bobaTestnet;
+    } else if (library._network.chainId === 5001) {
+      setCoin('BIT');
+      managecontractAddr = CREATE_TOKEN_MANAGE_ADDRESS.mantleTestnet;
     }
 
     if (account != undefined) {
       getFee();
-
     }
     // getPrice();
   }, [account, library]);
@@ -191,10 +190,9 @@ export default function CreateTokenMain() {
     } else if (library._network.chainId === 97) {
       setCoin('BNB');
       managecontractAddr = CREATE_TOKEN_MANAGE_ADDRESS.bsc;
-    }
-    else if (library._network.chainId === 28) {
-      setCoin('BOBA');
-      managecontractAddr = CREATE_TOKEN_MANAGE_ADDRESS.bobaTestnet;
+    } else if (library._network.chainId === 5001) {
+      setCoin('BIT');
+      managecontractAddr = CREATE_TOKEN_MANAGE_ADDRESS.mantleTestnet;
     }
     if (!account) {
       ErrorDlgShow(true, 'Wallet is unconnected');
@@ -290,8 +288,9 @@ export default function CreateTokenMain() {
     let overrid = {
       value: ethers.utils.parseUnits(feeInfo.curfee, 18),
     };
-console.log('----------------------standard_info',standard_info)
-    // console.log("info", standard_info);
+    console.log('----------------------standard_info', standard_info);
+    console.log('--------manage contract ', manage_contract);
+    console.log('info', standard_info);
     //Set Create Fee & Address
     try {
       await manage_contract.createStandard(
@@ -299,7 +298,7 @@ console.log('----------------------standard_info',standard_info)
         standard_info.name,
         standard_info.symbol,
         parseInt(standard_info.decimal),
-        ethers.utils.parseUnits(standard_info.totalsupply.toString(),standard_info.decimal.toString()),
+        ethers.utils.parseUnits(standard_info.totalsupply.toString(), standard_info.decimal.toString()),
         parseInt(standard_info.mint),
         parseInt(standard_info.burn),
         parseInt(standard_info.pause),
@@ -316,7 +315,7 @@ console.log('----------------------standard_info',standard_info)
         // getInfo();
       });
     } catch (error) {
-      // console.log("Creatiing error", error)
+      console.log('Creatiing error', error);
       ErrorDlgShow(true, 'Create token Error');
       ProgressDlgShow(false, '');
       return;
@@ -326,7 +325,7 @@ console.log('----------------------standard_info',standard_info)
   const createLiqudityToken = async (standard_info, deflation_info) => {
     getFeeInfo();
     let manage_contract;
-    console.log('----------------------standard_info',standard_info)
+    console.log('----------------------standard_info', standard_info);
 
     if (!account) {
       ErrorDlgShow(true, 'Wallet is unconnected');
@@ -353,7 +352,7 @@ console.log('----------------------standard_info',standard_info)
     // ProgressDlgShow(false, "");
     // return;
     //Set Create Fee & Address
-    console.log('----------------------standard_info',standard_info)
+    console.log('----------------------standard_info', standard_info);
 
     try {
       await manage_contract.createLiuidity(
@@ -362,7 +361,7 @@ console.log('----------------------standard_info',standard_info)
         standard_info.name,
         standard_info.symbol,
         parseInt(standard_info.decimal),
-        ethers.utils.parseUnits(standard_info.totalsupply.toString(),standard_info.decimal.toString()),
+        ethers.utils.parseUnits(standard_info.totalsupply.toString(), standard_info.decimal.toString()),
         parseInt(deflation_info.flag),
         [
           parseInt(deflation_info.tax_fee),
@@ -395,7 +394,7 @@ console.log('----------------------standard_info',standard_info)
 
   const getFeeInfo = async () => {
     let manage_contract;
-console.log('--------------get fee info')
+    console.log('--------------get fee info');
     if (!account) {
       ErrorDlgShow(true, 'Wallet is unconnected');
       ProgressDlgShow(false, '');
@@ -413,17 +412,17 @@ console.log('--------------get fee info')
     let fee;
 
     try {
-      console.log('--------------get manage_contract info',manage_contract)
+      console.log('--------------get manage_contract info', manage_contract);
 
       fee = await manage_contract.fee();
-      console.log("fee",fee);
+      console.log('fee', fee);
     } catch (error) {
       console.log(error);
       ErrorDlgShow(true, 'Get Fee Information Error');
       ProgressDlgShow(false, '');
       return;
     }
-console.log('-----------------------fee',fee)
+    console.log('-----------------------fee', fee);
     setFeeInfo((previousInputs) => ({
       ...previousInputs,
       normal: ethers.utils.formatUnits(fee.normal, 18),
@@ -435,7 +434,7 @@ console.log('-----------------------fee',fee)
     }));
 
     // console.log("normal fee", feeInfo.curfee);
-    if (feeInfo.curfee === 'NAN') {
+    if (feeInfo.curfee === '000') {
       setFeeInfo((previousInputs) => ({ ...previousInputs, curfee: ethers.utils.formatUnits(fee.normal, 18) }));
     }
   };
@@ -588,7 +587,7 @@ console.log('-----------------------fee',fee)
 
   const changeFeeInfo = (name, flag) => {
     let select_fee, prev_fee;
-    if (feeInfo[name] === 'NAN') {
+    if (feeInfo[name] === '000') {
       ErrorDlgShow(true, 'You should know ' + name + ' fee');
       return false;
     }

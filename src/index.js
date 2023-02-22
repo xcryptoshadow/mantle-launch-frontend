@@ -13,18 +13,6 @@ import Manage from './layouts/Manage.js';
 
 import './assets/css/material-dashboard-react.css?v=1.10.0';
 
-import { createTheme, ThemeProvider } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-
-// Create a new theme object with the desired primary color
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#4caf50',
-    },
-  },
-});
-
 const getLibrary = (provider) => {
   const library = new ethers.providers.Web3Provider(provider);
   return library;
@@ -32,17 +20,15 @@ const getLibrary = (provider) => {
 
 ReactDOM.render(
   <Web3ReactProvider getLibrary={getLibrary}>
-    <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <Switch>
-          <Route path="/client" component={Admin} />
-          <Route path="/manage" component={Manage} />
+    <BrowserRouter>
+      <Switch>
+        <Route path="/client" component={Admin} />
+        <Route path="/manage" component={Manage} />
 
-          {/* <Route path="/rtl" component={RTL} /> */}
-          <Redirect from="/" to="/client/TokenLock" />
-        </Switch>
-      </BrowserRouter>
-    </ThemeProvider>
+        {/* <Route path="/rtl" component={RTL} /> */}
+        <Redirect from="/" to="/client/TokenLock" />
+      </Switch>
+    </BrowserRouter>
   </Web3ReactProvider>,
   document.getElementById('root')
 );

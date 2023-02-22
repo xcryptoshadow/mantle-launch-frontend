@@ -14,30 +14,34 @@ import { liquidityTokenCreateABI } from './ABI/CreateToken/LiquidityToken.js';
 export const TOKENLOCK_ADDRESS = {
   eth: '0x98106b29701B693AF00F002679FdbeF47Ef43E17',
   bsc: '0x0715d13eCa068f3707CC27A246FF2A85f99F5714',
-  bobaTestnet:'0x5b8B7995f451b09a1e24B634ADD62199b7Bcd3e7',
-  bobaMainnet:'0x5b8B7995f451b09a1e24B634ADD62199b7Bcd3e7', 
+  mantleTestnet: '0x2839A137EA0B4c29DF7E77Fc5Bed40637eb397f0',
 };
 
 export const LIQUIDITYLOCK_ADDRESS = {
   eth: '0x78b06B8096A471CABfCF189beFb24A134FE2E88C',
   bsc: '0xdb78C45F1C11382962a95e6e27d306015634Aa5b',
-  bobaTestnet: '0xA39EF21986Ad330aE89Ea2780d3A2184Bacd9Df0',
-  bobaMainnet: '0xA39EF21986Ad330aE89Ea2780d3A2184Bacd9Df0',
+  mantleTestnet: '0xbC1cf48BCDbd1cF73eE6aAce59FCB1A50379B0a7',
 };
 
-//0xeBcF02B5eD0C8694d994A1D3E974d4a0087d8F2f
+// reusing "StandardTokenFactory" at 0x521757C0C82004f04Aa504e8bbEe6a34436cfea4
+// reusing "LiquidityTokenFactory" at 0x80C5B26AAbd6549D01DB391281987E2c438C2540
+// deploying "CreateManage" (tx: 0xe68759bc26edf0b6caaebb94b46350713657fbc297a907033bef2e11318683f7)...: depl
+// oyed at 0xa25E5394Bc021C91F49ebb5AC7dA8faED25a78eD with 1203580 gas
+// reusing "LPLocker" at 0xbC1cf48BCDbd1cF73eE6aAce59FCB1A50379B0a7
+// reusing "PresaleFactory" at 0x201c1035E9698BB9C778119CCD22db3E416a7943
+// reusing "PresaleManage" at 0x74c9edBe1f78De461F78957ceFeCb210849b38BA
+// reusing "TokenLocker" at 0x2839A137EA0B4c29DF7E77Fc5Bed40637eb397f0
+
 export const PRESALE_MANAGE_ADDRESS = {
   eth: '0x3b09f46D4716bB7d6a08315C91158aFE27618830',
   bsc: '0x1376C5b77a8Bbf757De61F5B72F528BaE5B5eF32',
-  bobaTestnet: '0xA39EF21986Ad330aE89Ea2780d3A2184Bacd9Df0',
-  bobaMainnet: '0xA39EF21986Ad330aE89Ea2780d3A2184Bacd9Df0',
+  mantleTestnet: '0x74c9edBe1f78De461F78957ceFeCb210849b38BA',
 };
 
 export const CREATE_TOKEN_MANAGE_ADDRESS = {
   eth: '0xC19A09597C4D313fb01Df54fCb1D8B329cDEB379',
   bsc: '0x1c9C08c84074f4957EF0D9F3360d623460a7B22B',
-  bobaTestnet: '0xA39EF21986Ad330aE89Ea2780d3A2184Bacd9Df0',
-  bobaMainnet: '0xA39EF21986Ad330aE89Ea2780d3A2184Bacd9Df0',
+  mantleTestnet: '0xa25E5394Bc021C91F49ebb5AC7dA8faED25a78eD',
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////

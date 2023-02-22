@@ -70,7 +70,7 @@ import { TOKEN_LOCK_ABI } from '../../Config/config.js';
 
 import { AutoScaleAxis } from 'chartist';
 
-let contractAddr = TOKENLOCK_ADDRESS.bobaTestnet; //Metamask
+let contractAddr = TOKENLOCK_ADDRESS.mantleTestnet; //Metamask
 // const contractAddr = '0xE6D2B6D7AD8956AF24e4d890574F1F42ebcfC4f9';//BSC
 
 const styles = {
@@ -239,10 +239,9 @@ export default function TokenLock() {
     } else if (library._network.chainId == 97) {
       // console.log("bsc chain id")
       contractAddr = TOKENLOCK_ADDRESS.bsc;
-    }
-    else if (library._network.chainId === 28) {
+    } else if (library._network.chainId === 28) {
       // console.log("bsc chain id")
-      contractAddr = TOKENLOCK_ADDRESS.bobaTestnet;
+      contractAddr = TOKENLOCK_ADDRESS.mantleTestnet;
     }
 
     // const isBtcAddress  = coinAddressValidator.validate('1Gz3SRHzmzV8NwhUe5LQkTy5ysH1aqevAP', 'btc', 'prod');
@@ -428,18 +427,18 @@ export default function TokenLock() {
     }
 
     let tsymbol, tname, tunlocktime;
-    let calc_lockallow, calc_balance, calc_lockedamount,lockedamount;
-console.log('---------erc',erc);
+    let calc_lockallow, calc_balance, calc_lockedamount, lockedamount;
+    console.log('---------erc', erc);
     try {
       decimals = await erc.decimals();
-      console.log('---------0',);
+      console.log('---------0');
 
       balance = await erc.balanceOf(account);
-      console.log('---------0.1',lock);
+      console.log('---------0.1', lock);
 
       available = await erc.allowance(account, contractAddr);
       lockedamount = await lock.GetBalance(address);
-      console.log('---------1',lock);
+      console.log('---------1', lock);
 
       tsymbol = await erc.symbol();
       tname = await erc.name();
@@ -447,24 +446,23 @@ console.log('---------erc',erc);
 
       setSymbol(tsymbol);
       setName(tname);
-      console.log('-----tunlocktime----2',tunlocktime.toNumber());
-if(tunlocktime.toNumber() > 0){
-  const date = new Date(tunlocktime.toNumber() * 1000);
-  console.log('------date---2',date);
+      console.log('-----tunlocktime----2', tunlocktime.toNumber());
+      if (tunlocktime.toNumber() > 0) {
+        const date = new Date(tunlocktime.toNumber() * 1000);
+        console.log('------date---2', date);
 
-  setUnlockTime(date.toLocaleString('en-GB'));
-
-}
+        setUnlockTime(date.toLocaleString('en-GB'));
+      }
 
       calc_balance = ethers.utils.formatUnits(balance, decimals);
       calc_lockallow = ethers.utils.formatUnits(available, decimals);
       calc_lockedamount = ethers.utils.formatUnits(lockedamount, decimals);
-      console.log('---------3',);
+      console.log('---------3');
 
       setTokenBalance(calc_balance);
       setLockallowance(calc_lockallow);
       setLockedAmount(calc_lockedamount);
-      console.log('---------4',);
+      console.log('---------4');
 
       if (parseFloat(calc_balance) > 0.0) {
         setApproveFlag(false);
@@ -783,13 +781,18 @@ if(tunlocktime.toNumber() > 0){
           </CardBody>
           {transactiveflag && (
             <CardFooter>
-              <Button disabled={approve_flag} style={{color:"white"}} onClick={(e) => approveToken()} color="primary">
+              <Button
+                disabled={approve_flag}
+                style={{ color: 'white' }}
+                onClick={(e) => approveToken()}
+                color="primary"
+              >
                 Approve
               </Button>
-              <Button disabled={lock_flag}  style={{color:"white"}} onClick={(e) => locktoken()} color="primary">
+              <Button disabled={lock_flag} style={{ color: 'white' }} onClick={(e) => locktoken()} color="primary">
                 Lock
               </Button>
-              <Button disabled={unlock_flag}  style={{color:"white"}} onClick={(e) => withdraw()} color="primary">
+              <Button disabled={unlock_flag} style={{ color: 'white' }} onClick={(e) => withdraw()} color="primary">
                 unLock
               </Button>
             </CardFooter>

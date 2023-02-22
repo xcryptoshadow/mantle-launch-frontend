@@ -44,7 +44,7 @@ const dashboardRoutes = [
   },
   {
     path: '/ecosystem',
-    name: 'Boba Ecosystem',
+    name: 'Mantle Ecosystem',
     rtlName: 'التطور للاحترافية',
     icon: LockIcon,
     component: LiquidityLock,

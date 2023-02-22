@@ -42,28 +42,28 @@ const netlist = [
     rpcurl: 'https://rpc.testnet.mantle.xyz/',
     blockurl: 'https://explorer.testnet.mantle.xyz/',
     chainname: 'MantleTestnet',
-    chainnetname: 'BIT',
+    chainnetname: 'RPS',
     chainsymbol: 'BIT',
     chaindecimals: 18,
   },
 ];
 
-const defaultRopstenconfig = {
-  testing: false,
+const defaultMantleconfig = {
+  testing: true,
   autoGasMultiplier: 1.5,
   defaultConfirmations: 1,
   defaultGas: '6000000',
   defaultGasPrice: '1000000000000',
-  nodetimeout: 10000,
+  nodetimeout: 100000,
 };
 
 function web3ProviderFrom(endpoint, config) {
-  const ethConfig = Object.assign(defaultRopstenconfig, config || {});
+  const ethConfig = Object.assign(defaultMantleconfig, config || {});
 
   const providerClass = endpoint.includes('wss') ? Web3.providers.WebsocketProvider : Web3.providers.HttpProvider;
 
-  // console.log(ethConfig)
-  // console.log(providerClass)
+  console.log('---------------->>>>eth config ', ethConfig);
+  console.log('---------------->>>>eth config ', providerClass);
 
   return new providerClass(endpoint, {
     timeout: ethConfig.nodetimeout,
